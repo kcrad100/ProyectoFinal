@@ -17,10 +17,10 @@ public class AddProducto extends javax.swing.JFrame {
      * Creates new form AddProducto
      */
     public MenuPpal menuPpal;
-    
-    public AddProducto(MenuPpal menuPpal) {
+
+    public AddProducto(MenuPpal menuppal) {
+        this.menuPpal = menuppal;
         initComponents();
-        this.menuPpal = menuPpal;
     }
 
     /**
@@ -88,8 +88,6 @@ public class AddProducto extends javax.swing.JFrame {
             }
         });
 
-        tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("$#,##0"))));
-       
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,7 +162,7 @@ public class AddProducto extends javax.swing.JFrame {
         int i = (int) evt.getKeyChar();
         if (i >= 97 && i <= 122 || i >= 65 && i <= 90) {
             evt.setKeyChar((char) evt.VK_CLEAR);
-            
+
         }
         if (i == 32) {
             evt.setKeyChar((char) evt.VK_CLEAR);
@@ -188,11 +186,11 @@ public class AddProducto extends javax.swing.JFrame {
             }
             Agregar();
     }//GEN-LAST:event_jButton2ActionPerformed
-    }
 
-    /**
-     * @param args the command line arguments
-     */
+        /**
+         * @param args the command line arguments
+         */
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -210,7 +208,7 @@ public class AddProducto extends javax.swing.JFrame {
     private BaseDatos bd;
     private int exist;
     private int valor;
-    
+
     public void Agregar() {
         exist = Integer.parseInt(tfExistencia.getText());
         valor = Integer.parseInt(this.tfValor.getText());
@@ -221,7 +219,7 @@ public class AddProducto extends javax.swing.JFrame {
         this.tfDescripcion.setText("");
         this.tfExistencia.setText("");
         this.tfValor.setText("");
-        
+
     }
 
     /**

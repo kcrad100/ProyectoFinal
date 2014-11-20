@@ -5,6 +5,9 @@
  */
 package proyectofinal;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author chepew23
@@ -14,7 +17,9 @@ public class ConsVenta extends javax.swing.JFrame {
     /**
      * Creates new form ConsVenta
      */
-    public ConsVenta() {
+    public MenuPpal menuppal;
+    public ConsVenta(MenuPpal menuppal) {
+        this.menuppal = menuppal;
         initComponents();
     }
 
@@ -44,18 +49,38 @@ public class ConsVenta extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(626, 326));
         setPreferredSize(new java.awt.Dimension(626, 326));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jtConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Consecutivo", "Fecha", "Cliente", "Producto", "Cantidad", "Valor"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jtConsulta.setPreferredSize(new java.awt.Dimension(375, 64));
         jScrollPane1.setViewportView(jtConsulta);
 
@@ -68,6 +93,11 @@ public class ConsVenta extends javax.swing.JFrame {
         btConsultar.setText("Consultar");
 
         btAtras.setText("Atrás");
+        btAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtrasActionPerformed(evt);
+            }
+        });
 
         btEliminar.setText("Eliminar");
 
@@ -136,40 +166,21 @@ public class ConsVenta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasActionPerformed
+        this.setVisible(false);
+        menuppal.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAtrasActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        Mostrar();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConsVenta().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAtras;
@@ -184,4 +195,58 @@ public class ConsVenta extends javax.swing.JFrame {
     private javax.swing.JTextField tfIdCliente;
     private javax.swing.JTextField tfIdProducto;
     // End of variables declaration//GEN-END:variables
+    private BaseDatos bd;
+    private DefaultTableModel modelo = new DefaultTableModel();
+
+    private void Mostrar() {
+        generaMatrizDatos();
+    }
+
+    /**
+     * @return the bd
+     */
+    public BaseDatos getBd() {
+        return bd;
+    }
+
+    /**
+     * @param bd the bd to set
+     */
+    public void setBd(BaseDatos bd) {
+        this.bd = bd;
+    }
+
+    /**
+     * @return the modelo
+     */
+    public DefaultTableModel getModelo() {
+        return modelo;
+    }
+
+    /**
+     * @param modelo the modelo to set
+     */
+    public void setModelo(DefaultTableModel modelo) {
+        this.modelo = modelo;
+    }
+
+    public void generaMatrizDatos() {
+        ArrayList lista = bd.getVentas();
+        Object[][] matriz = new Object[lista.size()][4];
+        for (int i = 0; i < lista.size(); i++) {
+            Venta cTemp = (Venta) lista.get(i);
+
+            matriz[i][0] = cTemp.getConsecVenta();
+            matriz[i][1] = cTemp.getFechaVenta();
+            matriz[i][2] = cTemp.getIdClien();
+            matriz[i][3] = cTemp.getCodProd();
+            matriz[i][4] = cTemp.getCantProdVenta();
+            matriz[i][5] = cTemp.getValorTotalVenta();
+
+        }
+        String[] identificadores = new String[]{"Codigo", "Decripción", "Existencia", "Valor"};
+        modelo.setDataVector(matriz, identificadores);
+        jtConsulta.setModel(modelo);
+
+    }
 }
