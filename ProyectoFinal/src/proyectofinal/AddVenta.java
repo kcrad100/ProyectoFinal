@@ -17,7 +17,7 @@ public class AddVenta extends javax.swing.JFrame {
      * Creates new form AddVenta
      */
     public MenuPpal menuPpal;
-    
+
     public AddVenta(MenuPpal menuPpal) {
         this.menuPpal = menuPpal;
         initComponents();
@@ -95,36 +95,35 @@ public class AddVenta extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(jLabel1)
+                .addContainerGap(150, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(btAtras))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cbClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                                .addComponent(tfValorVenta))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btAgregar)
-                                .addGap(41, 41, 41)))))
-                .addGap(36, 36, 36))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(btAtras))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfCantidad)
+                        .addComponent(tfValorVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btAgregar)
+                        .addGap(41, 41, 41)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,7 +143,7 @@ public class AddVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAgregar)
                     .addComponent(btAtras))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -161,21 +160,21 @@ public class AddVenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No es posible agregar una venta. Recuerde que debe seleccionar" + "\n"
                     + " un ID Cliente, un Código de Producto y la cantidad debe ser mayor a cero");
         } else {
-            
+
         }
     }//GEN-LAST:event_btAgregarActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.cbClientes.setSelectedIndex(-1);
-        this.cbProductos.setSelectedIndex(-1);
         itemsCb();
+        this.cbClientes.setSelectedIndex(-1);
+        this.cbProductos.setSelectedIndex(-1);        
     }//GEN-LAST:event_formWindowOpened
 
     private void tfCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCantidadKeyTyped
         int i = (int) evt.getKeyChar();
         if (i >= 97 && i <= 122 || i >= 65 && i <= 90) {
             evt.setKeyChar((char) evt.VK_CLEAR);
-            
+
         }
         if (i == 32) {
             evt.setKeyChar((char) evt.VK_CLEAR);
@@ -185,9 +184,13 @@ public class AddVenta extends javax.swing.JFrame {
 
     // calcula el valor total de la venta
     private void tfCantidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCantidadFocusLost
-        float vlrUnit = 0;
-        vlrUnit = (getBd().getProductos().get(cbProductos.getSelectedIndex()).getValrProducto()) * Integer.parseInt(tfCantidad.getText());
-        tfValorVenta.setText(String.valueOf(vlrUnit));
+        if (tfValorVenta.getText().equals("")) {
+                System.out.println("1");
+        } else {
+            float vlrUnit = 0;
+            vlrUnit = (getBd().getProductos().get(cbProductos.getSelectedIndex()).getValrProducto()) * Integer.parseInt(tfCantidad.getText());
+            tfValorVenta.setText(String.valueOf(vlrUnit));
+        }
         //tfValorVenta.setText(getBd().getProductos().get(cbProductos.getSelectedIndex()).getValrProducto());
     }//GEN-LAST:event_tfCantidadFocusLost
 
@@ -228,11 +231,11 @@ public class AddVenta extends javax.swing.JFrame {
     public void itemsCb() {
         for (int i = 0; i < getBd().getClientes().size(); i++) {
             cbClientes.addItem(getBd().getClientes().get(i).getNomCliente());
-            
+
         }
         for (int i = 0; i < getBd().getProductos().size(); i++) {
             cbProductos.addItem(getBd().getProductos().get(i).getDescProducto());
-            
+
         }
 
 //        int i = 0, j = 0;
@@ -243,5 +246,5 @@ public class AddVenta extends javax.swing.JFrame {
 //            cbProductos.addItem(getBd().getProductos().get(i).getDescProducto());
 //        }
     }
-    
+
 }
