@@ -129,6 +129,8 @@ public class MenuPpal extends javax.swing.JFrame {
     public String getRuta() {
         String rutaArchivo = "ninguno";
         JFileChooser filechooser = new JFileChooser();
+        filechooser.setApproveButtonText("Ok");
+        filechooser.setDialogTitle("Seleccionar Archivo");
         int returnVal = filechooser.showDialog(filechooser, null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = filechooser.getSelectedFile();
