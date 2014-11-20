@@ -17,7 +17,7 @@ public class AddCliente extends javax.swing.JFrame {
      * Creates new form AddProducto
      */
     public MenuPpal menuPpal;
-    
+
     public AddCliente(MenuPpal menuPpal) {
         initComponents();
         this.menuPpal = menuPpal;
@@ -236,17 +236,22 @@ public class AddCliente extends javax.swing.JFrame {
     protected javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
     private BaseDatos bd;
-    
+
     public void Agregar() {
         Cliente temp = new Cliente(this.getTfCodigo().getText(), this.getTfNombre().getText(), this.getTfDireccion().getText(), this.getTfTelefono().getText(), this.getTfEmail().getText(), this.getTfCategoria().getText()); // se crea un objeto de tipo Cliente temporal que obtendra los parametros de los Campos de la Interfaz Visual.
-        getBd().getClientes().add(temp); // se le añade el Cliente al ArrayList
-        JOptionPane.showMessageDialog(this, "Cliente Agregado");
-        this.getTfCodigo().setText("");
-        this.getTfNombre().setText("");
-        this.getTfDireccion().setText("");
-        this.getTfTelefono().setText("");
-        this.getTfEmail().setText("");
-        this.getTfCategoria().setText("");
+        if (getBd().validarCliente(temp, -1)) {
+            getBd().getClientes().add(temp);// se le añade el Cliente al ArrayList
+            JOptionPane.showMessageDialog(this, "Ciente Agregado");
+            this.getTfCodigo().setText("");
+            this.getTfNombre().setText("");
+            this.getTfDireccion().setText("");
+            this.getTfTelefono().setText("");
+            this.getTfEmail().setText("");
+            this.getTfCategoria().setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "El código del cliente ya esta en uso");
+        }
+
     }
 
     /**
@@ -516,5 +521,5 @@ public class AddCliente extends javax.swing.JFrame {
     public void setTfTelefono(javax.swing.JTextField tfTelefono) {
         this.tfTelefono = tfTelefono;
     }
-    
+
 }

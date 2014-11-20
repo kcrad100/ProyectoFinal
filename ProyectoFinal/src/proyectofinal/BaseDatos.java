@@ -45,4 +45,33 @@ public class BaseDatos implements Serializable {
         return ventas;
     }
     
+        public boolean validarCliente(Cliente clie, int indexIterator) {
+        boolean retorno = true;
+
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clie.getIdCliente().trim().equalsIgnoreCase(clientes.get(i).getIdCliente().trim())) {
+                if (i != indexIterator) {
+                    retorno = false;
+                    break;
+                }
+            }
+
+        }
+        return retorno;
+    }
+        public boolean validarProducto(Producto prod, int indexIterator) {
+        boolean retorno = true;
+
+        for (int i = 0; i < productos.size(); i++) {
+            if (prod.getCodProducto().trim().equalsIgnoreCase(productos.get(i).getCodProducto().trim())) {
+                if (i != indexIterator) {
+                    retorno = false;
+                    break;
+                }
+            }
+
+        }
+        return retorno;
+    }
+    
 }
