@@ -45,6 +45,11 @@ public class AddProducto extends javax.swing.JFrame {
         tfValor = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("DATOS DEL PRODUCTO");
 
@@ -57,10 +62,10 @@ public class AddProducto extends javax.swing.JFrame {
         jLabel5.setText("Valor");
 
         tfExistencia.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 tfExistenciaInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         tfExistencia.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +94,17 @@ public class AddProducto extends javax.swing.JFrame {
         });
 
         tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("$#,##0"))));
-       
+        tfValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfValorActionPerformed(evt);
+            }
+        });
+        tfValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfValorKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,14 +196,20 @@ public class AddProducto extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (tfCodigo.getText().trim().equals("") || (tfDescripcion.getText().trim().equals(""))) {
             JOptionPane.showMessageDialog(this, "El Codigo y/o Descripcion de Producto NO PUEDE ESTAR VACIO!", "Error Datos", JOptionPane.ERROR_MESSAGE);
-        } else {
-            if (tfExistencia.getText().equals("") || tfValor.getText().equals("")) {
+        } else if (!tfExistencia.getText().trim().isEmpty() || tfValor.getText().trim().isEmpty()) {
                 tfExistencia.setText("0");
                 tfValor.setText("0");
-            }
+            }else {
             Agregar();
+        }
+           
     }//GEN-LAST:event_jButton2ActionPerformed
-    }
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+    
+
 
     /**
      * @param args the command line arguments

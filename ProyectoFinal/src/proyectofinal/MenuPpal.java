@@ -305,8 +305,12 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddClieActionPerformed
 
     private void btConsClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsClieActionPerformed
-        this.setVisible(false);
+        if (bd.getClientes().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Debe Ingresar al Menos un Cliente", "Error Datos",JOptionPane.ERROR_MESSAGE);
+        }else{
+            this.setVisible(false);
         this.consClie.setVisible(true);
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_btConsClieActionPerformed
 
@@ -317,13 +321,24 @@ public class MenuPpal extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddProdActionPerformed
 
     private void btConsProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsProdActionPerformed
-        this.setVisible(false);
+        if (bd.getProductos().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Debe Ingresar al Menos un Producto", "Error Datos",JOptionPane.ERROR_MESSAGE);
+        }else{
+            this.setVisible(false);
+        consProd.setVisible(true);
+        }
 
         // Evento que llama el formulario de consultar producto
     }//GEN-LAST:event_btConsProdActionPerformed
 
     private void btConsVentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConsVentActionPerformed
-
+        if (bd.getVentas().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Debe Ingresar al Menos una Venta", "Error Datos",JOptionPane.ERROR_MESSAGE);
+        }else{
+            this.setVisible(false);
+            consVenta.setVisible(true);
+        }
+        
         // Evento que llama el formulario de consultar venta
     }//GEN-LAST:event_btConsVentActionPerformed
 
@@ -387,6 +402,8 @@ public class MenuPpal extends javax.swing.JFrame {
         addVenta.setBd(bd);
         consProd = new ConsProducto(menupri);
         consProd.setBd(bd);
+        consVenta = new ConsVenta(menupri);
+        consVenta.setBd(bd);
         
     }
 
@@ -407,9 +424,9 @@ public class MenuPpal extends javax.swing.JFrame {
     private static AddCliente addClie;
     private static ConsCliente consClie;
     private static AddProducto addProd;
-    private static int opcion;
     private static AddVenta addVenta;
     private static ConsProducto consProd;
+    private static ConsVenta consVenta;
     
     
 }
