@@ -16,7 +16,10 @@ public class AddVenta extends javax.swing.JFrame {
     /**
      * Creates new form AddVenta
      */
-    public AddVenta() {
+    public MenuPpal menuPpal;
+    
+    public AddVenta(MenuPpal menuPpal) {
+        this.menuPpal = menuPpal;
         initComponents();
     }
 
@@ -48,24 +51,30 @@ public class AddVenta extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
         jLabel1.setText("VENTAS");
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         jLabel2.setText("Cliente");
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         jLabel3.setText("Cod Producto");
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         jLabel4.setText("Cantidad");
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 11)); // NOI18N
         jLabel5.setText("Total Venta");
 
         tfCantidad.setText("0");
+        tfCantidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfCantidadFocusLost(evt);
+            }
+        });
+        tfCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfCantidadKeyTyped(evt);
+            }
+        });
 
         tfValorVenta.setText("0");
+        tfValorVenta.setEnabled(false);
 
         btAgregar.setText("Agregar");
         btAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +107,7 @@ public class AddVenta extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel3)
                             .addComponent(btAtras))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(cbClientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,7 +144,7 @@ public class AddVenta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAgregar)
                     .addComponent(btAtras))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,7 +152,7 @@ public class AddVenta extends javax.swing.JFrame {
 
     private void btAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasActionPerformed
         this.setVisible(false);
-        new MenuPpal().setVisible(true);
+        menuPpal.setVisible(true);
     }//GEN-LAST:event_btAtrasActionPerformed
 
     private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActionPerformed
@@ -152,7 +161,7 @@ public class AddVenta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No es posible agregar una venta. Recuerde que debe seleccionar" + "\n"
                     + " un ID Cliente, un Código de Producto y la cantidad debe ser mayor a cero");
         } else {
-
+            
         }
     }//GEN-LAST:event_btAgregarActionPerformed
 
@@ -162,40 +171,29 @@ public class AddVenta extends javax.swing.JFrame {
         itemsCb();
     }//GEN-LAST:event_formWindowOpened
 
+    private void tfCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCantidadKeyTyped
+        int i = (int) evt.getKeyChar();
+        if (i >= 97 && i <= 122 || i >= 65 && i <= 90) {
+            evt.setKeyChar((char) evt.VK_CLEAR);
+            
+        }
+        if (i == 32) {
+            evt.setKeyChar((char) evt.VK_CLEAR);
+        }
+// evento que no permite qe se ingresen letras en el campo
+    }//GEN-LAST:event_tfCantidadKeyTyped
+
+    // calcula el valor total de la venta
+    private void tfCantidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCantidadFocusLost
+        float vlrUnit = 0;
+        vlrUnit = (getBd().getProductos().get(cbProductos.getSelectedIndex()).getValrProducto()) * Integer.parseInt(tfCantidad.getText());
+        tfValorVenta.setText(String.valueOf(vlrUnit));
+        //tfValorVenta.setText(getBd().getProductos().get(cbProductos.getSelectedIndex()).getValrProducto());
+    }//GEN-LAST:event_tfCantidadFocusLost
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddVenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddVenta().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgregar;
@@ -228,12 +226,22 @@ public class AddVenta extends javax.swing.JFrame {
 
     //Método que permite cargar información de Clientes y Productos en los comboBox
     public void itemsCb() {
-        int i = 0, j = 0;
-        while (i < getBd().getClientes().size()) {
+        for (int i = 0; i < getBd().getClientes().size(); i++) {
             cbClientes.addItem(getBd().getClientes().get(i).getNomCliente());
+            
         }
-        while (j < getBd().getProductos().size()) {
+        for (int i = 0; i < getBd().getProductos().size(); i++) {
             cbProductos.addItem(getBd().getProductos().get(i).getDescProducto());
+            
         }
+
+//        int i = 0, j = 0;
+//        while (i < getBd().getClientes().size()) {
+//            cbClientes.addItem(getBd().getClientes().get(i).getNomCliente());
+//        }
+//        while (j < getBd().getProductos().size()) {
+//            cbProductos.addItem(getBd().getProductos().get(i).getDescProducto());
+//        }
     }
+    
 }

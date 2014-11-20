@@ -12,11 +12,15 @@ import javax.swing.JOptionPane;
  * @author David
  */
 public class AddCliente extends javax.swing.JFrame {
+
     /**
      * Creates new form AddProducto
      */
-    public AddCliente() {
+    public MenuPpal menuPpal;
+    
+    public AddCliente(MenuPpal menuPpal) {
         initComponents();
+        this.menuPpal = menuPpal;
     }
 
     /**
@@ -204,44 +208,12 @@ public class AddCliente extends javax.swing.JFrame {
 
     private void btAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasActionPerformed
         this.setVisible(false);        // TODO add your handling code here:
-        new MenuPpal().setVisible(true);
+        this.menuPpal.setVisible(true);
     }//GEN-LAST:event_btAtrasActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton BtAgregar;
@@ -264,7 +236,7 @@ public class AddCliente extends javax.swing.JFrame {
     protected javax.swing.JTextField tfTelefono;
     // End of variables declaration//GEN-END:variables
     private BaseDatos bd;
-
+    
     public void Agregar() {
         Cliente temp = new Cliente(this.getTfCodigo().getText(), this.getTfNombre().getText(), this.getTfDireccion().getText(), this.getTfTelefono().getText(), this.getTfEmail().getText(), this.getTfCategoria().getText()); // se crea un objeto de tipo Cliente temporal que obtendra los parametros de los Campos de la Interfaz Visual.
         getBd().getClientes().add(temp); // se le añade el Cliente al ArrayList
@@ -544,5 +516,5 @@ public class AddCliente extends javax.swing.JFrame {
     public void setTfTelefono(javax.swing.JTextField tfTelefono) {
         this.tfTelefono = tfTelefono;
     }
-
+    
 }

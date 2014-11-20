@@ -5,16 +5,18 @@
  */
 package proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class Producto {
+public class Producto implements Serializable {
 
     private String codProducto;
     private String descProducto;
     private int exstProducto;
-    private int valrProducto;
+    private float valrProducto;
     private boolean habilitado;
 
     public Producto(String codigo, String descripcion, int existencia, int valor) { // Objeto de Tipo Producto 
@@ -26,7 +28,7 @@ public class Producto {
     }
 
     public String ToString() { //Metodo que retorna el Codigo y la Descripcion del Producto
-        return this.getCodProducto() + ", " + this.getDescProducto() + ", " + this.getExstProducto() + ", " +this.getValrProducto();
+        return this.getCodProducto() + ", " + this.getDescProducto() + ", " + this.getExstProducto() + ", " + this.getValrProducto();
     }
 
     /**
@@ -74,7 +76,7 @@ public class Producto {
     /**
      * @return the valrProducto
      */
-    public int getValrProducto() {
+    public float getValrProducto() {
         return valrProducto;
     }
 

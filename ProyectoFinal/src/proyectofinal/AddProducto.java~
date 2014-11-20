@@ -16,11 +16,8 @@ public class AddProducto extends javax.swing.JFrame {
     /**
      * Creates new form AddProducto
      */
-    public MenuPpal menuPpal;
-    
-    public AddProducto(MenuPpal menuPpal) {
+    public AddProducto() {
         initComponents();
-        this.menuPpal = menuPpal;
     }
 
     /**
@@ -89,7 +86,12 @@ public class AddProducto extends javax.swing.JFrame {
         });
 
         tfValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("$#,##0"))));
-       
+        tfValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfValorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,24 +159,24 @@ public class AddProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_tfExistenciaInputMethodTextChanged
 
     private void tfExistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfExistenciaActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
     }//GEN-LAST:event_tfExistenciaActionPerformed
 
     private void tfExistenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfExistenciaKeyTyped
         int i = (int) evt.getKeyChar();
         if (i >= 97 && i <= 122 || i >= 65 && i <= 90) {
             evt.setKeyChar((char) evt.VK_CLEAR);
-            
+
         }
         if (i == 32) {
             evt.setKeyChar((char) evt.VK_CLEAR);
-        }
+        }  
 // TODO add your handling code here:
     }//GEN-LAST:event_tfExistenciaKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.setVisible(false);
-        menuPpal.setVisible(true);
+        new MenuPpal().setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -188,11 +190,42 @@ public class AddProducto extends javax.swing.JFrame {
             }
             Agregar();
     }//GEN-LAST:event_jButton2ActionPerformed
-    }
 
+   
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AddProducto().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -210,7 +243,7 @@ public class AddProducto extends javax.swing.JFrame {
     private BaseDatos bd;
     private int exist;
     private int valor;
-    
+
     public void Agregar() {
         exist = Integer.parseInt(tfExistencia.getText());
         valor = Integer.parseInt(this.tfValor.getText());
@@ -221,7 +254,7 @@ public class AddProducto extends javax.swing.JFrame {
         this.tfDescripcion.setText("");
         this.tfExistencia.setText("");
         this.tfValor.setText("");
-        
+
     }
 
     /**

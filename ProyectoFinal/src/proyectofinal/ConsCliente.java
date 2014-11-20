@@ -17,8 +17,11 @@ public class ConsCliente extends javax.swing.JFrame {
     /**
      * Creates new form ConsCliente
      */
-    public ConsCliente() {
+    public MenuPpal menuPpal;
+    
+    public ConsCliente(MenuPpal menuPpal) {
         initComponents();
+        this.menuPpal = menuPpal;
     }
 
     /**
@@ -44,7 +47,6 @@ public class ConsCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
         jLabel1.setText("Consulta General");
 
         btDelCs.setText("Eliminar");
@@ -68,11 +70,8 @@ public class ConsCliente extends javax.swing.JFrame {
             }
         });
 
-        jtConsulta.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         jtConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -103,22 +102,21 @@ public class ConsCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(270, 270, 270))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(235, 235, 235)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btAtrasCs)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btModCs)
-                                .addGap(32, 32, 32)
-                                .addComponent(btDelCs)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(btAtrasCs)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btModCs)
+                        .addGap(44, 44, 44)
+                        .addComponent(btDelCs))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,13 +125,12 @@ public class ConsCliente extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAtrasCs)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btDelCs)
-                        .addComponent(btModCs)))
-                .addGap(32, 32, 32))
+                    .addComponent(btDelCs)
+                    .addComponent(btModCs)
+                    .addComponent(btAtrasCs))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,7 +144,7 @@ public class ConsCliente extends javax.swing.JFrame {
 
     private void btAtrasCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasCsActionPerformed
         this.setVisible(false);
-        new MenuPpal().setVisible(true);
+        menuPpal.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_btAtrasCsActionPerformed
 
@@ -168,40 +165,6 @@ public class ConsCliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConsCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAtrasCs;
@@ -213,10 +176,66 @@ public class ConsCliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private BaseDatos bd;
     private DefaultTableModel modelo = new DefaultTableModel();
-
+    private int opcion;
+    
     public void Mostrar() {
         generaMatrizDatos();
+        
+        switch (opcion) {
+            
+            case 1:
+                System.out.println("tamaño antes:" + getBd().getClientes().size());
+//                
+//                //mostrar
+//
+//                int i = 0;
+//                while (i < bd.getClientes().size()) {
+//                    if (bd.getClientes().get(i).isHabilitado()) {
+//                        getModelo().setValueAt(bd.getClientes().get(i).getIdCliente(), i + 1, 1);
+//                        getModelo().setValueAt(bd.getClientes().get(i).getIdCliente(), i + 1, 2);
+//                        getModelo().setValueAt(bd.getClientes().get(i).getIdCliente(), i + 1, 3);
+//                        getModelo().setValueAt(bd.getClientes().get(i).getIdCliente(), i + 1, 4);
+//                        getModelo().setValueAt(bd.getClientes().get(i).getIdCliente(), i + 1, 5);
+//                    }
+//                    i++;
+//                }
+//                this.jtConsulta.setModel(modelo);
 
+                break;
+
+//            case 2:
+//                System.out.println("tamaño antes:" + getBd().getProductos().size());
+//                setModelo(new DefaultListModel());
+//                //mostrar
+//                int j = 0;
+//                while (j < bd.getProductos().size()) {
+//                    if (bd.getProductos().get(j).isHabilitado()) {
+//                        getModelo().addElement(bd.getProductos().get(j).ToString());
+//                    }
+//                    j++;
+//                }
+//                this.getJlVentana().setModel(getModelo());
+//
+//                break;
+//
+//            case 3:
+//                System.out.println("tamaño antes:" + getBd().getVentas().size());
+//                setModelo(new DefaultListModel());
+//                //mostrar
+//                int k = 0;
+//                while (k < bd.getVentas().size()) {
+//                    if (bd.getVentas().get(k).isHabilitado()) {
+//                        getModelo().addElement(bd.getVentas().get(k).ToString());
+//                    }
+//                    k++;
+//                }
+//                this.getJlVentana().setModel(getModelo());
+//
+//                break;
+            default:
+                System.err.println("1");
+            
+        }
     }
 
     /**
@@ -234,6 +253,40 @@ public class ConsCliente extends javax.swing.JFrame {
     }
 
     /**
+     * @return the jlVentana
+     */
+//    public javax.swing.JList getJlVentana() {
+//        return jlVentana;
+//    }
+//
+//    /**
+//     * @return the modelo
+//     */
+//    public DefaultListModel getModelo() {
+//        return modelo;
+//    }
+//
+//    /**
+//     * @param modelo the modelo to set
+//     */
+//    public void setModelo(DefaultListModel modelo) {
+//        this.modelo = modelo;
+//    }
+    /**
+     * @return the opcion
+     */
+    public int getOpcion() {
+        return opcion;
+    }
+
+    /**
+     * @param opcion the opcion to set
+     */
+    public void setOpcion(int opcion) {
+        this.opcion = opcion;
+    }
+
+    /**
      * @return the modelo
      */
     public DefaultTableModel getModelo() {
@@ -246,19 +299,19 @@ public class ConsCliente extends javax.swing.JFrame {
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
     }
-
+    
     public void generaMatrizDatos() {
         ArrayList lista = bd.getClientes();
         Object[][] matriz = new Object[lista.size()][5];
         for (int i = 0; i < lista.size(); i++) {
             Cliente cTemp = (Cliente) lista.get(i);
-
+            
             matriz[i][0] = cTemp.getIdCliente();
             matriz[i][1] = cTemp.getNomCliente();
             matriz[i][2] = cTemp.getDirCliente();
             matriz[i][3] = cTemp.getTelCliente();
             matriz[i][4] = cTemp.getEmailCliente();
-
+            
         }
         String[] identificadores = new String[]{"Id", "Nombre", "Direccion", "Telefono", "Email"};
         modelo.setDataVector(matriz, identificadores);

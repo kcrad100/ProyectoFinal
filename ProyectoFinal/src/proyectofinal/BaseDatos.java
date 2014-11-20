@@ -5,13 +5,14 @@
  */
 package proyectofinal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author David
  */
-public class BaseDatos {
+public class BaseDatos implements Serializable {
     
     private ArrayList<Cliente> clientes;
     private ArrayList<Producto> productos;
