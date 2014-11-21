@@ -5,11 +5,13 @@
  */
 package proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class Venta {
+public class Venta implements Serializable {
 
     private String consecVenta, fechaVenta, idClien, codProd;
     private int cantProdVenta, valorTotalVenta;

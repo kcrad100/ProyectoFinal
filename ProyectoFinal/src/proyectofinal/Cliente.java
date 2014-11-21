@@ -5,11 +5,13 @@
  */
 package proyectofinal;
 
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class Cliente {
+public class Cliente implements Serializable {
 
     private String idCliente, nomCliente, dirCliente, telCliente, emailCliente, categoriaCliente;
     private boolean habilitado;

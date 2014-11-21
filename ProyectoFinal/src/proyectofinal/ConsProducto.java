@@ -7,6 +7,9 @@ package proyectofinal;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import proyectofinal.BaseDatos;
+import proyectofinal.MenuPpal;
+import proyectofinal.Producto;
 
 /**
  *
@@ -17,7 +20,10 @@ public class ConsProducto extends javax.swing.JFrame {
     /**
      * Creates new form ConsProducto
      */
-    public ConsProducto() {
+    public MenuPpal menuppal;
+
+    public ConsProducto(MenuPpal menuppal) {
+        this.menuppal = menuppal;
         initComponents();
     }
 
@@ -118,12 +124,13 @@ public class ConsProducto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void btAtrasCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasCsActionPerformed
         this.setVisible(false);
-        new MenuPpal().setVisible(true);
+        menuppal.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_btAtrasCsActionPerformed
 
@@ -136,44 +143,13 @@ public class ConsProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btDelCsActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       Mostrar();
+        Mostrar();
         // Metodo que pasa el modelo a la tabla 
     }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConsProducto().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAtrasCs;
@@ -183,12 +159,11 @@ public class ConsProducto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtConsulta;
     // End of variables declaration//GEN-END:variables
-    
+
     private BaseDatos bd;
     private DefaultTableModel modelo = new DefaultTableModel();
-    
-    
-    private void Mostrar(){
+
+    private void Mostrar() {
         generaMatrizDatos();
     }
 
@@ -219,8 +194,8 @@ public class ConsProducto extends javax.swing.JFrame {
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
     }
-    
-     public void generaMatrizDatos(){
+
+    public void generaMatrizDatos() {
         ArrayList lista = bd.getProductos();
         Object[][] matriz = new Object[lista.size()][4];
         for (int i = 0; i < lista.size(); i++) {
@@ -235,10 +210,7 @@ public class ConsProducto extends javax.swing.JFrame {
         String[] identificadores = new String[]{"Codigo", "Decripción", "Existencia", "Valor"};
         modelo.setDataVector(matriz, identificadores);
         jtConsulta.setModel(modelo);
-        
-    
-    }
-    
-    
-}
 
+    }
+
+}

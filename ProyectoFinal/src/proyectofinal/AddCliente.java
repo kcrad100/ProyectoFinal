@@ -12,11 +12,15 @@ import javax.swing.JOptionPane;
  * @author David
  */
 public class AddCliente extends javax.swing.JFrame {
+
     /**
      * Creates new form AddProducto
      */
-    public AddCliente() {
+    public MenuPpal menuPpal;
+
+    public AddCliente(MenuPpal menuPpal) {
         initComponents();
+        this.menuPpal = menuPpal;
     }
 
     /**
@@ -74,7 +78,7 @@ public class AddCliente extends javax.swing.JFrame {
             }
         });
 
-        BtAgregar.setText("Agregar");
+        BtAgregar.setText("AGREGAR");
         BtAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtAgregarActionPerformed(evt);
@@ -91,7 +95,7 @@ public class AddCliente extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 255));
         jLabel8.setText("DATOS CLIENTE");
 
-        btAtras.setText("Atrás");
+        btAtras.setText("ATRÁS");
         btAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtrasActionPerformed(evt);
@@ -105,7 +109,7 @@ public class AddCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(btAtras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(BtAgregar)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
@@ -204,44 +208,12 @@ public class AddCliente extends javax.swing.JFrame {
 
     private void btAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtrasActionPerformed
         this.setVisible(false);        // TODO add your handling code here:
-        new MenuPpal().setVisible(true);
+        this.menuPpal.setVisible(true);
     }//GEN-LAST:event_btAtrasActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddCliente().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JButton BtAgregar;
@@ -267,14 +239,19 @@ public class AddCliente extends javax.swing.JFrame {
 
     public void Agregar() {
         Cliente temp = new Cliente(this.getTfCodigo().getText(), this.getTfNombre().getText(), this.getTfDireccion().getText(), this.getTfTelefono().getText(), this.getTfEmail().getText(), this.getTfCategoria().getText()); // se crea un objeto de tipo Cliente temporal que obtendra los parametros de los Campos de la Interfaz Visual.
-        getBd().getClientes().add(temp); // se le añade el Cliente al ArrayList
-        JOptionPane.showMessageDialog(this, "Cliente Agregado");
-        this.getTfCodigo().setText("");
-        this.getTfNombre().setText("");
-        this.getTfDireccion().setText("");
-        this.getTfTelefono().setText("");
-        this.getTfEmail().setText("");
-        this.getTfCategoria().setText("");
+        if (getBd().validarCliente(temp, -1)) {
+            getBd().getClientes().add(temp);// se le añade el Cliente al ArrayList
+            JOptionPane.showMessageDialog(this, "Ciente Agregado");
+            this.getTfCodigo().setText("");
+            this.getTfNombre().setText("");
+            this.getTfDireccion().setText("");
+            this.getTfTelefono().setText("");
+            this.getTfEmail().setText("");
+            this.getTfCategoria().setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "El código del cliente ya esta en uso");
+        }
+
     }
 
     /**
