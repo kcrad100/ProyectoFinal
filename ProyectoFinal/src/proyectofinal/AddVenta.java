@@ -66,6 +66,7 @@ public class AddVenta extends javax.swing.JFrame {
         tfCantidad.setText("0");
 
         tfValorVenta.setText("0");
+        tfValorVenta.setEnabled(false);
 
         btAgregar.setText("Agregar");
         btAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -229,11 +230,11 @@ public class AddVenta extends javax.swing.JFrame {
     //Método que permite cargar información de Clientes y Productos en los comboBox
     public void itemsCb() {
         int i = 0, j = 0;
-        while (i < getBd().getClientes().size()) {
-            cbClientes.addItem(getBd().getClientes().get(i).getNomCliente());
-        }
-        while (j < getBd().getProductos().size()) {
-            cbProductos.addItem(getBd().getProductos().get(i).getDescProducto());
-        }
+//        while (i < getBd().getClientes().size()) {
+//            cbClientes.addItem(getBd().getClientes().get(i).getNomCliente());
+//        }
+//        while (j < getBd().getProductos().size()) {
+//            cbProductos.addItem(getBd().getProductos().get(i).getDescProducto());
+//        }
     }
 }

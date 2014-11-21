@@ -74,7 +74,7 @@ public class AddCliente extends javax.swing.JFrame {
             }
         });
 
-        BtAgregar.setText("AGREGAR");
+        BtAgregar.setText("Agregar");
         BtAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtAgregarActionPerformed(evt);
@@ -91,7 +91,7 @@ public class AddCliente extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 255));
         jLabel8.setText("DATOS CLIENTE");
 
-        btAtras.setText("ATRÁS");
+        btAtras.setText("Atrás");
         btAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtrasActionPerformed(evt);
@@ -105,7 +105,7 @@ public class AddCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(btAtras)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(BtAgregar)
                 .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
